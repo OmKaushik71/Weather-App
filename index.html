@@ -7,10 +7,61 @@
     <title>Weather App</title>
     <link rel="icon" href="./images/favicon.svg">
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap" rel="stylesheet" />
+
 </head>
 
 <body>
 
+    <div class="container">
+        <header>
+            <h1>Weather App</h1>
+            <form>
+                <input type="text" placeholder="Enter a city" required>
+                <button><img src="./images/search-icon.png" alt="search-icon"></button>
+            </form>
+            <div class="btn-container">
+                <button>Celsius</button>
+                <button>Fahrenheit</button>
+            </div>
+        </header>
+        <main>
+            <div class="location"><span id="l-name">Amsterdam</span>,<span id="country">Netherlands</span></div>
+            <div class="date">1 August, 2023</div>
+            <section>
+                <div class="temp">
+                    <div class="temp-data">
+                        <img src="//cdn.weatherapi.com/weather/64x64/night/116.png" alt="" class="weather-emoji">
+                        <span class="temp-val">33&#xb0;C</span>
+                    </div>
+                    <div class="temp-text">
+                        <h3 class="condition-text">Broken Clouds</h3>
+                        <h3 class="feels-like">Feels like 40&#xb0;C</h3>
+                    </div>
+                </div>
+                <div class="attributes">
+                    <div class="air-quality card">
+                        <span>Air Quality</span>
+                        <h3>Normal</h3>
+                    </div>
+                    <div class="visibility card">
+                        <span>Visibility</span>
+                        <h3>5Km</h3>
+                    </div>
+                    <div class="wind card">
+                        <span>Wind</span>
+                        <h3>5km/hr</h3>
+                    </div>
+                    <div class="uv card">
+                        <span>UV index</span>
+                        <h3>7</h3>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>Built by <a href="https://github.com/OmKaushik71">Om Kaushik</a></footer>
 </body>
 
 </html>
