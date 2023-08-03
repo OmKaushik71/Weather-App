@@ -9,6 +9,7 @@
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap" rel="stylesheet" />
+    <script type="text/JavaScript" src=" https://MomentJS.com/downloads/moment.js"></script>
 </head>
 
 <body>
@@ -60,6 +61,11 @@
             </section>
         </main>
         <footer>Built by <a href="https://github.com/OmKaushik71">Om Kaushik</a></footer>
+        <script type="text/JavaScript">
+                     var a = moment().format("D MMMM, YYYY");
+                     const dateDiv = document.querySelector('.date');
+                     dateDiv.textContent = a;
+                  </script>
     </div>
 </body>
 

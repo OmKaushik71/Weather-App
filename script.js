@@ -5,7 +5,6 @@ const toggleCBtn = document.querySelectorAll('.btn-container > button')[0];
 const toggleFBtn = document.querySelectorAll('.btn-container > button')[1];
 const locationNameDiv = document.querySelector('#l-name');
 const countryNameDiv = document.querySelector('#country');
-const dateDiv = document.querySelector('.date');
 const weatherIcon = document.querySelector('.temp-data img');
 const tempValDiv = document.querySelector('.temp-val');
 const weatherTextDiv = document.querySelector('.condition-text');
