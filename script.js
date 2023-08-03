@@ -109,7 +109,7 @@ function getBackgroundUrl(code) {
   return `./images/${mappedValue}.jpg`;
 }
 
-loadPage('Amsterdam');
+loadPage('Seattle');
 submitInputBtn.addEventListener('click', (e) => {
   e.preventDefault();
   loadRequiredPage(inputDiv.value);
