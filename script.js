@@ -44,6 +44,7 @@ async function loadPage(query) {
       feelsLikeDiv.innerHTML = obj.feelsLikeF;
     }
   });
+  inputDiv.value = '';
 }
 async function loadRequiredPage() {
   console.log(inputDiv.value);
@@ -84,6 +85,7 @@ async function getWeather(query) {
     return requiredData;
   } catch (err) {
     alert(err);
+    inputDiv.value = '';
   }
 }
 
@@ -111,5 +113,5 @@ function getBackgroundUrl(code) {
 loadPage('Seattle');
 submitInputBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  loadRequiredPage(inputDiv.value);
+  loadPage(inputDiv.value);
 });
