@@ -1,3 +1,56 @@
+const form = document.querySelector('form');
+const inputDiv = document.querySelector('input');
+const submitInputBtn = document.querySelector('form > button');
+const toggleCBtn = document.querySelectorAll('.btn-container > button')[0];
+const toggleFBtn = document.querySelectorAll('.btn-container > button')[1];
+const locationNameDiv = document.querySelector('#l-name');
+const countryNameDiv = document.querySelector('#country');
+const dateDiv = document.querySelector('.date');
+const weatherIcon = document.querySelector('.temp-data img');
+const tempValDiv = document.querySelector('.temp-val');
+const weatherTextDiv = document.querySelector('.condition-text');
+const feelsLikeDiv = document.querySelector('.feels-like');
+const airQualityDiv = document.querySelector('.air-quality h3');
+const visibilityDiv = document.querySelector('.visibility h3');
+const windDiv = document.querySelector('.wind h3');
+const uvDiv = document.querySelector('.uv h3');
+
+async function loadPage(query) {
+  const obj = await getWeather(query);
+  const url = await getBackgroundUrl(obj.conditionCode);
+  document.body.style.backgroundImage = `url('${await url}')`;
+  locationNameDiv.textContent = obj.name;
+  countryNameDiv.textContent = obj.country;
+  weatherIcon.src = obj.conditionImg;
+  tempValDiv.innerHTML = obj.tempC;
+  weatherTextDiv.textContent = obj.conditionText;
+  feelsLikeDiv.innerHTML = obj.feelsLikeC;
+  airQualityDiv.textContent = obj.air;
+  visibilityDiv.textContent = obj.visibility;
+  windDiv.textContent = obj.wind;
+  uvDiv.textContent = obj.uvIndex;
+  toggleCBtn.addEventListener('click', () => {
+    toggleFBtn.classList.toggle('active');
+    toggleCBtn.classList.toggle('active');
+    if (tempValDiv.innerHTML != obj.tempC) {
+      tempValDiv.innerHTML = obj.tempC;
+      feelsLikeDiv.innerHTML = obj.feelsLikeC;
+    }
+  });
+  toggleFBtn.addEventListener('click', () => {
+    toggleCBtn.classList.toggle('active');
+    toggleFBtn.classList.toggle('active');
+    if (tempValDiv.innerHTML != obj.tempF) {
+      tempValDiv.innerHTML = obj.tempF;
+      feelsLikeDiv.innerHTML = obj.feelsLikeF;
+    }
+  });
+}
+async function loadRequiredPage() {
+  console.log(inputDiv.value);
+  await loadPage(inputDiv.value);
+}
+
 async function getWeather(query) {
   const url = `https://api.weatherapi.com/v1/current.json?key=f9e3995e0a4142a0b81173558233007&q=${query}&aqi=yes`;
   try {
@@ -21,13 +74,12 @@ async function getWeather(query) {
       conditionText: dataObj.current.condition.text,
       conditionImg: dataObj.current.condition.icon,
       conditionCode: dataObj.current.condition.code,
-      tempC: dataObj.current.temp_c,
-      tempF: dataObj.current.temp_f,
-      feelsLikeC: dataObj.current.feelslike_c,
-      feelsLikeF: dataObj.current.feelslike_f,
-      visibility: dataObj.current.vis_km,
-      wind: dataObj.current.wind_kph,
-      date: dataObj.location.localtime,
+      tempC: `${dataObj.current.temp_c}` + '&#xb0;C',
+      tempF: `${dataObj.current.temp_f}` + '&#xb0;F',
+      feelsLikeC: `Feels like ${dataObj.current.feelslike_c}` + '&#xb0;C',
+      feelsLikeF: `Feels like ${dataObj.current.feelslike_f}` + '&#xb0;F',
+      visibility: `${dataObj.current.vis_km}Km`,
+      wind: `${dataObj.current.wind_kph}Km/h`,
       uvIndex: dataObj.current.uv,
     };
     return requiredData;
@@ -35,9 +87,7 @@ async function getWeather(query) {
     alert(err);
   }
 }
-(async () => {
-  console.log(await getWeather('Boston'));
-})();
+
 function getBackgroundUrl(code) {
   let mappedValue;
   const cloudy = [1003, 1006, 1009];
@@ -58,3 +108,9 @@ function getBackgroundUrl(code) {
   else if (thunder.includes(code)) mappedValue = 'thunder';
   return `./images/${mappedValue}.jpg`;
 }
+
+loadPage('Amsterdam');
+submitInputBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  loadRequiredPage(inputDiv.value);
+});
