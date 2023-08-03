@@ -30,17 +30,17 @@ async function loadPage(query) {
   windDiv.textContent = obj.wind;
   uvDiv.textContent = obj.uvIndex;
   toggleCBtn.addEventListener('click', () => {
-    toggleFBtn.classList.toggle('active');
-    toggleCBtn.classList.toggle('active');
-    if (tempValDiv.innerHTML != obj.tempC) {
+    if (!tempValDiv.innerHTML.includes('C')) {
+      toggleFBtn.classList.toggle('active');
+      toggleCBtn.classList.toggle('active');
       tempValDiv.innerHTML = obj.tempC;
       feelsLikeDiv.innerHTML = obj.feelsLikeC;
     }
   });
   toggleFBtn.addEventListener('click', () => {
-    toggleCBtn.classList.toggle('active');
-    toggleFBtn.classList.toggle('active');
-    if (tempValDiv.innerHTML != obj.tempF) {
+    if (!tempValDiv.innerHTML.includes('F')) {
+      toggleCBtn.classList.toggle('active');
+      toggleFBtn.classList.toggle('active');
       tempValDiv.innerHTML = obj.tempF;
       feelsLikeDiv.innerHTML = obj.feelsLikeF;
     }
