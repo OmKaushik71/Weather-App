@@ -81,6 +81,8 @@ form img{
 }
 form > button{
     cursor: pointer;
+    outline: none;
+    border: none;
 }
 .btn-container > button{
     border-radius: 20px;
