@@ -9,7 +9,7 @@ const weatherIcon = document.querySelector('.temp-data img');
 const tempValDiv = document.querySelector('.temp-val');
 const weatherTextDiv = document.querySelector('.condition-text');
 const feelsLikeDiv = document.querySelector('.feels-like');
-const airQualityDiv = document.querySelector('.air-quality h3');
+const humidityDiv = document.querySelector('.humidity h3');
 const visibilityDiv = document.querySelector('.visibility h3');
 const windDiv = document.querySelector('.wind h3');
 const uvDiv = document.querySelector('.uv h3');
@@ -24,7 +24,7 @@ async function loadPage(query) {
   tempValDiv.innerHTML = obj.tempC;
   weatherTextDiv.textContent = obj.conditionText;
   feelsLikeDiv.innerHTML = obj.feelsLikeC;
-  airQualityDiv.textContent = obj.air;
+  humidityDiv.textContent = obj.humidity;
   visibilityDiv.textContent = obj.visibility;
   windDiv.textContent = obj.wind;
   uvDiv.textContent = obj.uvIndex;
@@ -57,20 +57,10 @@ async function getWeather(query) {
     let response = await fetch(url, { mode: 'cors' });
     if (!response.ok) throw new Error(`City ${query} not found`);
     let dataObj = await response.json();
-
-    const airQuality = [
-      'Good',
-      'Moderate',
-      'Unhealthy for sensitive groups',
-      'Unhealthy',
-      'Very Unhealthy',
-      'Hazardous',
-    ];
-    // console.log(dataObj);
     const requiredData = {
       country: dataObj.location.country,
       name: dataObj.location.name,
-      air: airQuality[dataObj.current.air_quality['us-epa-index'] - 1],
+      humidity: dataObj.current.humidity + '%',
       conditionText: dataObj.current.condition.text,
       conditionImg: dataObj.current.condition.icon,
       conditionCode: dataObj.current.condition.code,
